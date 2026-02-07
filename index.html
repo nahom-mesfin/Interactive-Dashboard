@@ -43,7 +43,7 @@
 
             <!-- Profile Avatar -->
             <div class="profile">
-              <img src="https://i.pravatar.cc/40" alt="profile" />
+              <img src="https://i.pravatar.cc/40?u=1" alt="profile" />
               <span>Nahom</span>
             </div>
 
@@ -53,37 +53,55 @@
           </div>
         </header>
 
-        <!-- Widgets -->
-        <section class="widgets">
-          <div class="widget">
-            <h3>Total Sales</h3>
-            <p id="salesCount">0</p>
-          </div>
+        <!-- Sections -->
+        <section id="overviewSection" class="section active">
+          <!-- Widgets -->
+          <section class="widgets">
+            <div class="widget">
+              <h3>Total Sales</h3>
+              <p id="salesCount">0</p>
+            </div>
 
-          <div class="widget">
-            <h3>New Users</h3>
-            <p id="usersCount">0</p>
-          </div>
+            <div class="widget">
+              <h3>New Users</h3>
+              <p id="usersCount">0</p>
+            </div>
 
-          <div class="widget">
-            <h3>Active Sessions</h3>
-            <p id="sessionsCount">0</p>
-          </div>
+            <div class="widget">
+              <h3>Active Sessions</h3>
+              <p id="sessionsCount">0</p>
+            </div>
+          </section>
+
+          <!-- Charts -->
+          <section class="charts">
+            <div class="chart-container">
+              <canvas id="lineChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="barChart"></canvas>
+            </div>
+
+            <div class="chart-container small-chart">
+              <canvas id="doughnutChart"></canvas>
+            </div>
+          </section>
         </section>
 
-        <!-- Charts -->
-        <section class="charts">
-          <div class="chart-container">
-            <canvas id="lineChart"></canvas>
-          </div>
+        <section id="analyticsSection" class="section">
+          <h2>Analytics Section</h2>
+          <p>Here you can show analytics details, tables, charts, etc.</p>
+        </section>
 
-          <div class="chart-container">
-            <canvas id="barChart"></canvas>
-          </div>
+        <section id="reportsSection" class="section">
+          <h2>Reports Section</h2>
+          <p>Reports content goes here.</p>
+        </section>
 
-          <div class="chart-container">
-            <canvas id="doughnutChart"></canvas>
-          </div>
+        <section id="settingsSection" class="section">
+          <h2>Settings Section</h2>
+          <p>Settings content goes here.</p>
         </section>
       </div>
     </div>
