@@ -15,16 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===== Counters =====
+  // ===== Animated Counters with commas =====
   function animateValue(id, end) {
     let start = 0;
     const duration = 1000;
     const increment = end / (duration / 16);
     const counter = setInterval(() => {
       start += increment;
-      document.getElementById(id).innerText = Math.floor(start);
+      document.getElementById(id).innerText =
+        Math.floor(start).toLocaleString();
       if (start >= end) {
-        document.getElementById(id).innerText = end;
+        document.getElementById(id).innerText = end.toLocaleString();
         clearInterval(counter);
       }
     }, 16);
@@ -46,14 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
           borderColor: "#4a90e2",
           backgroundColor: "rgba(74,144,226,0.2)",
           tension: 0.4,
+          pointHoverRadius: 8,
+          pointHoverBackgroundColor: "#50e3c2",
         },
       ],
     },
-    options: { responsive: true },
+    options: {
+      responsive: true,
+      plugins: { tooltip: { mode: "index", intersect: false } },
+      interaction: { mode: "nearest", intersect: true },
+    },
   });
 
   const barCtx = document.getElementById("barChart").getContext("2d");
-  new Chart(barCtx, {
+  let barChart = new Chart(barCtx, {
     type: "bar",
     data: {
       labels: ["Chrome", "Firefox", "Safari", "Edge", "Opera"],
@@ -62,13 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
           label: "Users",
           data: [65, 59, 80, 81, 56],
           backgroundColor: "#50e3c2",
+          hoverBackgroundColor: "#4a90e2",
         },
       ],
     },
     options: { responsive: true },
   });
 
-  new Chart(document.getElementById("doughnutChart"), {
+  let doughnutChart = new Chart(document.getElementById("doughnutChart"), {
     type: "doughnut",
     data: {
       labels: ["Desktop", "Mobile", "Tablet"],
@@ -76,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           data: [60, 30, 10],
           backgroundColor: ["#4a90e2", "#50e3c2", "#ffcd56"],
+          hoverOffset: 10,
         },
       ],
     },
@@ -83,16 +92,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== Update Button =====
-  document.getElementById("updateData").addEventListener("click", () => {
-    const newData = Array.from({ length: lineChart.data.labels.length }, () =>
-      Math.floor(Math.random() * 600),
+  function updateDashboard() {
+    // Update line chart
+    const newLineData = Array.from(
+      { length: lineChart.data.labels.length },
+      () => Math.floor(Math.random() * 600),
     );
-    lineChart.data.datasets[0].data = newData;
+    lineChart.data.datasets[0].data = newLineData;
     lineChart.update();
+
+    // Update bar chart
+    const newBarData = Array.from({ length: barChart.data.labels.length }, () =>
+      Math.floor(Math.random() * 100),
+    );
+    barChart.data.datasets[0].data = newBarData;
+    barChart.update();
+
+    // Update doughnut chart
+    const newDoughData = [
+      Math.floor(Math.random() * 70) + 10,
+      Math.floor(Math.random() * 50) + 5,
+      Math.floor(Math.random() * 30) + 1,
+    ];
+    doughnutChart.data.datasets[0].data = newDoughData;
+    doughnutChart.update();
+
+    // Update counters
     animateValue("salesCount", Math.floor(Math.random() * 2000));
     animateValue("usersCount", Math.floor(Math.random() * 1000));
     animateValue("sessionsCount", Math.floor(Math.random() * 200));
-  });
+  }
+
+  document
+    .getElementById("updateData")
+    .addEventListener("click", updateDashboard);
+
+  // ===== Live Updates every 5 seconds =====
+  setInterval(updateDashboard, 5000);
 
   // ===== Date Filter =====
   document.getElementById("rangeFilter").addEventListener("change", (e) => {
@@ -118,34 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
   }
-
-  // ===== Profile & Notification Panels =====
-  const profileBtn = document.getElementById("profileBtn");
-  const profilePanel = document.getElementById("profilePanel");
-  const notificationBtn = document.getElementById("notificationBtn");
-  const notificationPanel = document.getElementById("notificationPanel");
-
-  profileBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    profilePanel.classList.toggle("show");
-    notificationPanel.classList.remove("show");
-  });
-
-  notificationBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    notificationPanel.classList.toggle("show");
-    profilePanel.classList.remove("show");
-  });
-
-  document.addEventListener("click", () => {
-    profilePanel.classList.remove("show");
-    notificationPanel.classList.remove("show");
-  });
-
-  // ===== Sidebar Collapse =====
-  const collapseBtn = document.getElementById("collapseBtn");
-  const sidebar = document.querySelector(".sidebar");
-  collapseBtn.addEventListener("click", () =>
-    sidebar.classList.toggle("collapsed"),
-  );
 });

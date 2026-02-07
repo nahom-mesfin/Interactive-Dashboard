@@ -8,9 +8,11 @@
 :root {
   --primary-color: #4a90e2;
   --secondary-color: #50e3c2;
+  --accent-color: #ffcd56;
   --background-color: #f5f7fa;
   --text-color: #4a4a4a;
   --card-color: #ffffff;
+  --hover-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .dark-mode {
@@ -24,10 +26,14 @@ body {
   font-family: "Segoe UI", sans-serif;
   background: var(--background-color);
   color: var(--text-color);
+  transition:
+    background 0.3s,
+    color 0.3s;
 }
 .dashboard {
   display: flex;
   min-height: 100vh;
+  transition: all 0.3s;
 }
 
 /* Sidebar */
@@ -69,12 +75,14 @@ body {
 .sidebar ul li a:hover {
   color: var(--secondary-color);
   transform: translateX(5px);
+  font-weight: 600;
 }
 
 /* Main Content */
 .main-content {
   flex: 1;
   padding: 40px;
+  transition: all 0.3s;
 }
 
 /* Header */
@@ -88,6 +96,7 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 .header-actions button {
   padding: 8px 15px;
@@ -100,6 +109,7 @@ body {
 }
 .header-actions button:hover {
   opacity: 0.8;
+  transform: scale(1.05);
 }
 
 /* Profile & Notifications */
@@ -110,21 +120,17 @@ body {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+.profile:hover,
+.notification:hover {
+  transform: scale(1.05);
 }
 .profile img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-}
-.badge {
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 50%;
+  transition: all 0.3s;
 }
 
 /* Panels */
@@ -138,13 +144,20 @@ body {
   color: var(--text-color);
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  min-width: 150px;
+  box-shadow: var(--hover-shadow);
+  min-width: 180px;
   z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 .profile-panel.show,
 .notification-panel.show {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 .profile-panel p,
 .notification-panel p {
@@ -154,6 +167,7 @@ body {
 .profile-panel p:hover,
 .notification-panel p:hover {
   color: var(--primary-color);
+  font-weight: 600;
 }
 
 /* Widgets */
@@ -172,7 +186,8 @@ body {
   transition: 0.3s;
 }
 .widget:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: var(--hover-shadow);
 }
 .widget h3 {
   margin-bottom: 10px;
@@ -196,6 +211,10 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+.chart-container:hover {
+  box-shadow: var(--hover-shadow);
 }
 .small-chart {
   height: 300px;
@@ -216,6 +235,10 @@ select {
   padding: 6px 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  transition: 0.3s;
+}
+select:hover {
+  border-color: var(--primary-color);
 }
 
 /* Responsive */
