@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Sales Dashboard</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <h2 class="logo">Dashboard</h2>
+        <ul>
+          <li><a href="#">Overview</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Reports</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div>
+            <h1>Sales Analytics</h1>
+            <p>Live dashboard overview</p>
+          </div>
+
+          <div class="header-actions">
+            <!-- Date Filter -->
+            <select id="rangeFilter">
+              <option value="6">Last 6 Months</option>
+              <option value="12">Last 12 Months</option>
+            </select>
+
+            <!-- Notification Badge -->
+            <div class="notification">🔔 <span class="badge">3</span></div>
+
+            <!-- Profile Avatar -->
+            <div class="profile">
+              <img src="https://i.pravatar.cc/40" alt="profile" />
+              <span>Nahom</span>
+            </div>
+
+            <!-- Update & Theme Buttons -->
+            <button id="updateData">Update Data</button>
+            <button id="themeToggle">🌙</button>
+          </div>
+        </header>
+
+        <!-- Widgets -->
+        <section class="widgets">
+          <div class="widget">
+            <h3>Total Sales</h3>
+            <p id="salesCount">0</p>
+          </div>
+
+          <div class="widget">
+            <h3>New Users</h3>
+            <p id="usersCount">0</p>
+          </div>
+
+          <div class="widget">
+            <h3>Active Sessions</h3>
+            <p id="sessionsCount">0</p>
+          </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="charts">
+          <div class="chart-container">
+            <canvas id="lineChart"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="barChart"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="doughnutChart"></canvas>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
