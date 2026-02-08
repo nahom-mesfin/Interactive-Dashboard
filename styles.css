@@ -43,7 +43,11 @@ body {
   color: white;
   padding: 20px;
   transition: 0.3s;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
+
 .sidebar.collapsed {
   width: 60px;
 }
@@ -248,6 +252,12 @@ select:hover {
     flex-direction: column;
   }
   .sidebar {
-    display: none;
+    width: 250px;
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
   }
 }
